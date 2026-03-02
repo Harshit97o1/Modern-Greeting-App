@@ -1,0 +1,486 @@
+/* ===================================================
+   MODERN GREETING APP — Premium Stylesheet
+   =================================================== */
+
+/* ---------- CSS Custom Properties ---------- */
+:root {
+  --clr-bg-start: #0f0c29;
+  --clr-bg-mid: #302b63;
+  --clr-bg-end: #24243e;
+
+  --clr-card-bg: rgba(255, 255, 255, 0.07);
+  --clr-card-border: rgba(255, 255, 255, 0.15);
+  --clr-card-shadow: rgba(0, 0, 0, 0.45);
+
+  --clr-accent: #7f5af0;
+  --clr-accent-light: #a78bfa;
+  --clr-accent-glow: rgba(127, 90, 240, 0.45);
+
+  --clr-text: #ffffffee;
+  --clr-text-muted: #ffffffaa;
+  --clr-input-bg: rgba(255, 255, 255, 0.06);
+  --clr-input-border: rgba(255, 255, 255, 0.18);
+  --clr-input-focus: rgba(127, 90, 240, 0.55);
+
+  --radius-lg: 24px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+
+  --font-main: 'Segoe UI', system-ui, -apple-system, sans-serif;
+
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ---------- Reset & Base ---------- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-main);
+  color: var(--clr-text);
+  background: linear-gradient(135deg, var(--clr-bg-start), var(--clr-bg-mid), var(--clr-bg-end));
+  background-size: 400% 400%;
+  animation: bgShift 18s ease infinite;
+  overflow: hidden;
+  position: relative;
+}
+
+@keyframes bgShift {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* ---------- Ambient Floating Orbs ---------- */
+.ambient-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.orb-1 {
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, #7f5af0, transparent 70%);
+  top: -120px;
+  left: -100px;
+  animation: orbFloat1 14s ease-in-out infinite;
+}
+
+.orb-2 {
+  width: 340px;
+  height: 340px;
+  background: radial-gradient(circle, #e056a0, transparent 70%);
+  bottom: -80px;
+  right: -60px;
+  animation: orbFloat2 16s ease-in-out infinite;
+}
+
+.orb-3 {
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, #56c8e0, transparent 70%);
+  top: 50%;
+  right: 20%;
+  animation: orbFloat3 20s ease-in-out infinite;
+}
+
+@keyframes orbFloat1 {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(60px, 40px) scale(1.15);
+  }
+}
+
+@keyframes orbFloat2 {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(-50px, -30px) scale(1.1);
+  }
+}
+
+@keyframes orbFloat3 {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(30px, -50px) scale(1.2);
+  }
+}
+
+/* ---------- Animation Canvas ---------- */
+#animation-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+/* ---------- Card ---------- */
+.card {
+  position: relative;
+  z-index: 1;
+  width: 92%;
+  max-width: 460px;
+  padding: 48px 40px 40px;
+  border-radius: var(--radius-lg);
+  background: var(--clr-card-bg);
+  border: 1px solid var(--clr-card-border);
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  box-shadow:
+    0 8px 32px var(--clr-card-shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  text-align: center;
+
+  /* Entrance animation */
+  animation: cardEntrance 0.8s var(--transition-smooth) both;
+  overflow: hidden;
+}
+
+.card-shine {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 180deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.04) 10%,
+      transparent 20%);
+  animation: shineRotate 8s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes shineRotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes cardEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.96);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ---------- Typography ---------- */
+.card-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 32px;
+  background: linear-gradient(135deg, #ffffff 30%, var(--clr-accent-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ---------- Input ---------- */
+.input-group {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 16px 20px;
+  font-size: 1rem;
+  font-family: var(--font-main);
+  color: var(--clr-text);
+  background: var(--clr-input-bg);
+  border: 1.5px solid var(--clr-input-border);
+  border-radius: var(--radius-md);
+  outline: none;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.input-field::placeholder {
+  color: var(--clr-text-muted);
+  font-weight: 400;
+}
+
+.input-field:focus {
+  border-color: var(--clr-accent);
+  background: rgba(255, 255, 255, 0.09);
+  box-shadow:
+    0 0 0 4px var(--clr-accent-glow),
+    0 0 20px rgba(127, 90, 240, 0.15);
+}
+
+.input-highlight {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--clr-accent);
+  border-radius: 2px;
+  transition: width var(--transition-smooth), left var(--transition-smooth);
+  pointer-events: none;
+}
+
+.input-field:focus~.input-highlight {
+  width: 100%;
+  left: 0;
+}
+
+/* ---------- Button ---------- */
+.btn-primary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 16px 32px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  font-family: var(--font-main);
+  letter-spacing: 0.03em;
+  color: #fff;
+  background: linear-gradient(135deg, var(--clr-accent), #6c3ed6);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  overflow: hidden;
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    filter var(--transition-fast);
+  box-shadow: 0 4px 20px var(--clr-accent-glow);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px var(--clr-accent-glow);
+  filter: brightness(1.12);
+}
+
+.btn-primary:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: 0 2px 12px var(--clr-accent-glow);
+  filter: brightness(0.95);
+  transition-duration: 0.08s;
+}
+
+.btn-text {
+  position: relative;
+  z-index: 1;
+}
+
+/* Ripple effect on button */
+.btn-ripple {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255, 255, 255, 0.25) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+
+.btn-primary:hover .btn-ripple {
+  opacity: 1;
+}
+
+/* ---------- Greeting Output ---------- */
+.greeting-text {
+  min-height: 42px;
+  margin-top: 28px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: transparent;
+  background: linear-gradient(135deg, #e0aaff, #7f5af0, #56c8e0);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.greeting-text.visible {
+  opacity: 1;
+  transform: translateY(0);
+  animation: textGradient 4s ease infinite;
+}
+
+@keyframes textGradient {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* ---------- Confetti Piece ---------- */
+.confetti-piece {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  top: -20px;
+  animation: confettiFall linear forwards;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+
+  85% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* ---------- Party Popper Particle ---------- */
+.popper-particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  animation: popperBurst ease-out forwards;
+}
+
+@keyframes popperBurst {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ---------- Radial Glow (Cinematic Burst) ---------- */
+/*
+ * IMPORTANT: No CSS animation is applied here.
+ * All animation is driven by the Web Animations API in JS.
+ * Previously, a CSS `animation: glowPulse` with no duration
+ * defaulted to 0s, snapping opacity to 0 instantly and making
+ * the entire effect invisible. That conflict is now removed.
+ */
+
+/* Primary glow orb — styling only, JS animates */
+.radial-glow {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+  /* hidden until JS animates */
+  filter: blur(6px);
+  /* lighter base blur — visible core */
+  will-change: transform, opacity, filter;
+  pointer-events: none;
+}
+
+/* Concentric expanding ring — styling only, JS animates */
+.radial-glow-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  background: transparent;
+  opacity: 0;
+  /* hidden until JS animates */
+  filter: blur(0.5px);
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 520px) {
+  .card {
+    padding: 36px 24px 32px;
+    border-radius: 20px;
+  }
+
+  .card-title {
+    font-size: 1.4rem;
+    margin-bottom: 24px;
+  }
+
+  .input-field {
+    padding: 14px 16px;
+    font-size: 0.95rem;
+  }
+
+  .btn-primary {
+    padding: 14px 24px;
+    font-size: 0.98rem;
+  }
+
+  .greeting-text {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .card {
+    padding: 28px 16px 24px;
+  }
+}
