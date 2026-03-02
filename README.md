@@ -141,7 +141,3 @@ This project is open source and available for personal and educational use.
 <p align="center">
   Built with ❤️ by <strong>Antigravity</strong> — Google DeepMind
 </p>
-<<<<<<< HEAD
-=======
-
->>>>>>> 41f67bb03e5b7929c8965d6a00b4622ea9dadb74
